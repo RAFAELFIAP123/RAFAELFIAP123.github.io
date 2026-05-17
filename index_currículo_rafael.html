@@ -1,0 +1,700 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Rafael Louzã Lopes | Desenvolvedor de Agente IA LLM</title>
+<meta name="description" content="Portfólio de Rafael Louzã Lopes — Estudante de Ciência da Computação na FIAP, Desenvolvedor de Agente IA LLM, em busca de estágio no Itaú Unibanco." />
+
+<!-- Tailwind CDN -->
+<script src="https://cdn.tailwindcss.com"></script>
+
+<!-- Fontes -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Inter:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+
+<script>
+  tailwind.config = {
+    theme: {
+      extend: {
+        fontFamily: {
+          sans: ['Inter', 'ui-sans-serif', 'system-ui'],
+          serif: ['"Instrument Serif"', 'serif'],
+          mono: ['"JetBrains Mono"', 'ui-monospace', 'monospace'],
+        },
+        colors: {
+          ink: {
+            950: '#05070d',
+            900: '#0a0e1a',
+            800: '#0f1424',
+            700: '#161c30',
+          },
+          azure: {
+            300: '#7cc4ff',
+            400: '#4ea4ff',
+            500: '#2b82ff',
+            600: '#1864e6',
+          }
+        }
+      }
+    }
+  }
+</script>
+
+<style>
+  :root {
+    --grid-color: rgba(78, 164, 255, 0.07);
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background-color: #05070d;
+    color: #e6ebf5;
+    font-family: 'Inter', sans-serif;
+    -webkit-font-smoothing: antialiased;
+    overflow-x: hidden;
+  }
+
+  .bg-grid {
+    background-image:
+      linear-gradient(var(--grid-color) 1px, transparent 1px),
+      linear-gradient(90deg, var(--grid-color) 1px, transparent 1px);
+    background-size: 64px 64px;
+  }
+
+  .aurora {
+    position: absolute;
+    border-radius: 9999px;
+    filter: blur(120px);
+    opacity: 0.55;
+    pointer-events: none;
+    animation: drift 18s ease-in-out infinite alternate;
+  }
+  @keyframes drift {
+    0%   { transform: translate(0, 0) scale(1); }
+    100% { transform: translate(40px, -30px) scale(1.15); }
+  }
+
+  .noise::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='160' height='160'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/></filter><rect width='100%25' height='100%25' filter='url(%23n)' opacity='0.6'/></svg>");
+    opacity: 0.04;
+    pointer-events: none;
+    mix-blend-mode: overlay;
+  }
+
+  .grad-text {
+    background: linear-gradient(135deg, #ffffff 0%, #7cc4ff 50%, #2b82ff 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+  }
+
+  .grad-text-soft {
+    background: linear-gradient(135deg, #e6ebf5 0%, #9ec6ff 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+  }
+
+  .grad-border {
+    position: relative;
+    background: #0a0e1a;
+    border-radius: 1rem;
+  }
+  .grad-border::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    padding: 1px;
+    border-radius: inherit;
+    background: linear-gradient(135deg, rgba(78,164,255,0.5), rgba(78,164,255,0.05) 40%, rgba(255,255,255,0.04) 100%);
+    -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+    -webkit-mask-composite: xor;
+            mask-composite: exclude;
+    pointer-events: none;
+  }
+
+  .avatar-ring {
+    position: relative;
+    padding: 4px;
+    border-radius: 9999px;
+    background: conic-gradient(from 0deg, #2b82ff, #7cc4ff, #ffffff, #2b82ff);
+    animation: spin 8s linear infinite;
+  }
+  @keyframes spin { to { transform: rotate(360deg); } }
+  .avatar-ring > div { animation: spin 8s linear infinite reverse; }
+
+  .pulse-dot {
+    position: relative;
+  }
+  .pulse-dot::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    border-radius: 9999px;
+    background: #34d399;
+    animation: pulse 2s ease-out infinite;
+  }
+  @keyframes pulse {
+    0%   { transform: scale(1);   opacity: 0.6; }
+    100% { transform: scale(2.4); opacity: 0;   }
+  }
+
+  .reveal {
+    opacity: 0;
+    transform: translateY(28px);
+    transition: opacity 0.9s cubic-bezier(.2,.7,.2,1), transform 0.9s cubic-bezier(.2,.7,.2,1);
+  }
+  .reveal.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  .cta {
+    position: relative;
+    overflow: hidden;
+    isolation: isolate;
+  }
+  .cta::before {
+    content: "";
+    position: absolute;
+    top: 0; left: -120%;
+    width: 60%; height: 100%;
+    background: linear-gradient(110deg, transparent, rgba(255,255,255,0.35), transparent);
+    transition: left 0.7s ease;
+    z-index: 1;
+  }
+  .cta:hover::before { left: 140%; }
+
+  .timeline-dot {
+    box-shadow: 0 0 0 4px rgba(78,164,255,0.18), 0 0 24px rgba(78,164,255,0.6);
+  }
+
+  .card-hover {
+    transition: transform 0.4s cubic-bezier(.2,.7,.2,1), border-color 0.4s;
+  }
+  .card-hover:hover {
+    transform: translateY(-4px);
+  }
+
+  ::-webkit-scrollbar { width: 10px; }
+  ::-webkit-scrollbar-track { background: #05070d; }
+  ::-webkit-scrollbar-thumb { background: #1864e6; border-radius: 10px; }
+
+  .marquee {
+    display: flex;
+    gap: 3rem;
+    animation: marquee 30s linear infinite;
+    width: max-content;
+  }
+  @keyframes marquee {
+    from { transform: translateX(0); }
+    to   { transform: translateX(-50%); }
+  }
+</style>
+</head>
+
+<body class="relative">
+
+<!-- BACKGROUND GLOBAL -->
+<div class="fixed inset-0 -z-10 overflow-hidden">
+  <div class="bg-grid absolute inset-0 opacity-60"></div>
+  <div class="aurora bg-azure-600/40" style="width:520px;height:520px; top:-120px; left:-80px;"></div>
+  <div class="aurora bg-azure-400/30" style="width:600px;height:600px; top:30%; right:-120px; animation-delay: -6s;"></div>
+  <div class="aurora bg-azure-500/25" style="width:420px;height:420px; bottom:-100px; left:30%; animation-delay: -12s;"></div>
+</div>
+
+<!-- NAV -->
+<nav class="relative z-50 max-w-6xl mx-auto px-6 lg:px-10 py-6 flex items-center justify-between">
+  <div class="flex items-center gap-3">
+    <div class="w-9 h-9 rounded-lg grad-border flex items-center justify-center">
+      <span class="font-serif text-xl italic text-azure-300">R</span>
+    </div>
+    <span class="font-mono text-xs tracking-widest text-white/60 uppercase hidden sm:block">Rafael Louzã / 2026</span>
+  </div>
+
+  <div class="hidden md:flex items-center gap-8 font-mono text-xs tracking-wider text-white/60 uppercase">
+    <a href="#sobre" class="hover:text-azure-300 transition">Sobre</a>
+    <a href="#experiencia" class="hover:text-azure-300 transition">Experiência</a>
+    <a href="#skills" class="hover:text-azure-300 transition">Skills</a>
+    <a href="https://github.com/RAFAELFIAP123" target="_blank" rel="noopener" class="hover:text-azure-300 transition inline-flex items-center gap-1.5">
+      <svg xmlns="http://www.w3.org/2000/svg" class="w-3.5 h-3.5" fill="currentColor" viewBox="0 0 24 24">
+        <path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.4 3-.405 1.02.005 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"/>
+      </svg>
+      GitHub
+    </a>
+    <a href="#contato" class="hover:text-azure-300 transition">Contato</a>
+  </div>
+
+  <a href="#contato"
+     class="cta inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white text-ink-950 text-xs font-semibold tracking-wide hover:bg-azure-300 transition">
+    <span class="relative z-[2]">Conectar</span>
+    <svg xmlns="http://www.w3.org/2000/svg" class="w-3.5 h-3.5 relative z-[2]" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5">
+      <path stroke-linecap="round" stroke-linejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3"/>
+    </svg>
+  </a>
+</nav>
+
+<!-- HERO -->
+<header class="relative noise max-w-6xl mx-auto px-6 lg:px-10 pt-12 pb-24 lg:pt-20 lg:pb-32">
+  <div class="grid lg:grid-cols-12 gap-12 items-center">
+
+    <div class="lg:col-span-7 reveal">
+      <div class="inline-flex items-center gap-2.5 px-3 py-1.5 rounded-full border border-white/10 bg-white/5 backdrop-blur-sm mb-8">
+        <span class="relative w-2 h-2">
+          <span class="pulse-dot block w-2 h-2 rounded-full bg-emerald-400"></span>
+        </span>
+        <span class="font-mono text-[11px] tracking-widest text-white/70 uppercase">Disponível para estágio</span>
+      </div>
+
+      <!-- Nome em destaque -->
+      <p class="font-mono text-xs sm:text-sm tracking-[0.3em] text-azure-300 uppercase mb-5">Rafael Louzã Lopes</p>
+
+      <h1 class="font-sans text-4xl sm:text-5xl lg:text-6xl font-bold leading-[1.05] tracking-tight">
+        <span class="block text-white">Construindo o</span>
+        <span class="block grad-text font-serif italic font-normal">próximo capítulo</span>
+        <span class="block text-white">da minha jornada</span>
+        <span class="block text-white">em tecnologia.</span>
+      </h1>
+
+      <p class="mt-8 text-lg sm:text-xl text-white/70 max-w-2xl leading-relaxed">
+        Estudante de Ciência da Computação na FIAP <span class="text-white/40">·</span>
+        Desenvolvendo um <span class="text-azure-300 font-medium">Agente IA LLM</span> integrado ao WhatsApp <span class="text-white/40">·</span>
+        Em busca de estágio no <span class="text-white font-semibold">Itaú Unibanco</span> para crescer junto com um time de excelência.
+      </p>
+
+      <div class="mt-10 flex flex-wrap gap-4">
+        <a href="#contato"
+           class="cta inline-flex items-center gap-2 px-6 py-3.5 rounded-full bg-gradient-to-r from-azure-500 to-azure-400 text-white font-semibold shadow-[0_8px_40px_-12px_rgba(43,130,255,0.6)] hover:shadow-[0_8px_50px_-8px_rgba(43,130,255,0.9)] transition">
+          <span class="relative z-[2]">Vamos Conversar</span>
+          <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4 relative z-[2]" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M17 8l4 4m0 0l-4 4m4-4H3"/>
+          </svg>
+        </a>
+        <a href="#experiencia"
+           class="inline-flex items-center gap-2 px-6 py-3.5 rounded-full border border-white/15 bg-white/[0.03] text-white/90 font-medium hover:bg-white/[0.07] hover:border-white/25 transition">
+          Conhecer trajetória
+        </a>
+      </div>
+
+      <div class="mt-12 flex flex-wrap items-center gap-3">
+        <span class="font-mono text-[10px] tracking-widest text-white/40 uppercase mr-2">stack atual</span>
+        <span class="px-3 py-1 rounded-md bg-white/5 border border-white/10 font-mono text-xs text-white/70">LLMs</span>
+        <span class="px-3 py-1 rounded-md bg-white/5 border border-white/10 font-mono text-xs text-white/70">Python</span>
+        <span class="px-3 py-1 rounded-md bg-white/5 border border-white/10 font-mono text-xs text-white/70">WhatsApp API</span>
+        <span class="px-3 py-1 rounded-md bg-white/5 border border-white/10 font-mono text-xs text-white/70">Agentes IA</span>
+      </div>
+    </div>
+
+    <div class="lg:col-span-5 reveal flex justify-center lg:justify-end">
+      <div class="relative">
+        <div class="absolute inset-0 -m-8 bg-azure-500/30 blur-3xl rounded-full"></div>
+
+        <div class="avatar-ring relative">
+          <div class="w-56 h-56 sm:w-72 sm:h-72 rounded-full overflow-hidden bg-ink-800 ring-4 ring-ink-950">
+            <img src="https://i.imgur.com/5Mju8fX.jpg"
+                 alt="Foto de Rafael Louzã Lopes"
+                 class="w-full h-full object-cover" />
+          </div>
+        </div>
+
+        <div class="absolute -bottom-4 -left-6 sm:-left-12 grad-border px-4 py-3 rounded-2xl backdrop-blur">
+          <div class="flex items-center gap-3">
+            <div class="w-9 h-9 rounded-lg bg-azure-500/20 border border-azure-400/30 flex items-center justify-center text-azure-300 text-lg">⚡</div>
+            <div>
+              <div class="font-mono text-[10px] tracking-widest text-white/50 uppercase">Em desenvolvimento</div>
+              <div class="text-sm font-semibold text-white">Agente Negociador</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="absolute -top-2 -right-2 sm:-right-8 grad-border px-4 py-3 rounded-2xl backdrop-blur">
+          <div class="text-center">
+            <div class="font-serif italic text-2xl grad-text-soft">FIAP</div>
+            <div class="font-mono text-[10px] tracking-widest text-white/50 uppercase">3º semestre</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="mt-24 flex items-center gap-6">
+    <div class="h-px flex-1 bg-gradient-to-r from-transparent via-white/15 to-transparent"></div>
+    <span class="font-mono text-[10px] tracking-[0.3em] text-white/40 uppercase">Role para conhecer</span>
+    <div class="h-px flex-1 bg-gradient-to-r from-transparent via-white/15 to-transparent"></div>
+  </div>
+</header>
+
+<!-- MARQUEE -->
+<section class="relative py-8 border-y border-white/5 bg-white/[0.015] overflow-hidden">
+  <div class="marquee font-serif italic text-3xl sm:text-5xl text-white/15 whitespace-nowrap">
+    <span>Aprendizado</span><span>·</span>
+    <span>Curiosidade</span><span>·</span>
+    <span>Inteligência Artificial</span><span>·</span>
+    <span>Evolução Contínua</span><span>·</span>
+    <span>Tecnologia & Negócio</span><span>·</span>
+    <span>Aprendizado</span><span>·</span>
+    <span>Curiosidade</span><span>·</span>
+    <span>Inteligência Artificial</span><span>·</span>
+    <span>Evolução Contínua</span><span>·</span>
+    <span>Tecnologia & Negócio</span><span>·</span>
+  </div>
+</section>
+
+<!-- SOBRE -->
+<section id="sobre" class="relative max-w-6xl mx-auto px-6 lg:px-10 py-24 lg:py-32">
+  <div class="flex items-center gap-4 mb-12 reveal">
+    <span class="font-mono text-[10px] tracking-[0.3em] text-azure-400 uppercase">/ 01</span>
+    <span class="font-mono text-[10px] tracking-[0.3em] text-white/50 uppercase">Sobre mim</span>
+    <div class="h-px flex-1 bg-white/10"></div>
+  </div>
+
+  <div class="grid lg:grid-cols-12 gap-12">
+    <div class="lg:col-span-4 reveal">
+      <h2 class="font-sans text-3xl lg:text-4xl font-bold leading-tight text-white">
+        Em busca de uma
+        <span class="grad-text font-serif italic font-normal">primeira experiência</span>
+        que ensine de verdade.
+      </h2>
+      <p class="mt-4 text-white/60">
+        Quero aprender com quem faz bem feito, contribuir de forma consistente e construir uma base sólida desde o início da carreira.
+      </p>
+    </div>
+
+    <div class="lg:col-span-8 space-y-6 reveal">
+      <p class="text-lg text-white/80 leading-relaxed">
+        Sou <strong class="text-white">Rafael Louzã Lopes</strong>, estudante de Ciência da Computação na <strong class="text-white">FIAP (3º semestre)</strong>, apaixonado por tecnologia e especialmente pelo potencial da Inteligência Artificial em transformar o mercado financeiro.
+      </p>
+
+      <p class="text-white/70 leading-relaxed">
+        Atualmente estou desenvolvendo um <strong class="text-azure-300">Agente de IA LLM Negociador integrado ao WhatsApp</strong> — um projeto que combina Large Language Models, automação e fluxos conversacionais. É a minha escola prática, onde venho aprendendo a transformar ideias em soluções funcionais, lidar com problemas reais e refinar entregas com base em feedback.
+      </p>
+
+      <p class="text-white/70 leading-relaxed">
+        Antes da faculdade, atuei como técnico no <strong class="text-white">Hospital Universitário da USP</strong>, onde aprendi cedo o valor da responsabilidade, do trabalho em equipe e de manter a calma em ambientes exigentes. Essa bagagem me ajuda hoje a encarar desafios técnicos com mais maturidade.
+      </p>
+
+      <p class="text-white/70 leading-relaxed">
+        Estou no momento da carreira em que mais quero <strong class="text-white">aprender</strong> — absorver boas práticas, entender como produtos digitais são construídos em escala e me desenvolver ao lado de profissionais experientes.
+      </p>
+    </div>
+  </div>
+
+  <!-- Diferenciais -->
+  <div class="mt-20">
+    <h3 class="font-mono text-xs tracking-[0.3em] text-white/50 uppercase mb-8 reveal">→ O que trago para a equipe</h3>
+
+    <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-4">
+      <div class="grad-border card-hover p-6 reveal">
+        <div class="w-11 h-11 rounded-xl bg-azure-500/10 border border-azure-400/20 flex items-center justify-center text-2xl mb-5">🧠</div>
+        <h4 class="font-semibold text-white mb-2">Visão de Solução</h4>
+        <p class="text-sm text-white/60 leading-relaxed">Gosto de entender o problema por inteiro — da dor do usuário até a arquitetura técnica — antes de sair codando.</p>
+      </div>
+      <div class="grad-border card-hover p-6 reveal">
+        <div class="w-11 h-11 rounded-xl bg-azure-500/10 border border-azure-400/20 flex items-center justify-center text-2xl mb-5">🎯</div>
+        <h4 class="font-semibold text-white mb-2">Comunicação Clara</h4>
+        <p class="text-sm text-white/60 leading-relaxed">Consigo traduzir ideias técnicas em apresentações objetivas — habilidade que venho exercitando em entregas semanais.</p>
+      </div>
+      <div class="grad-border card-hover p-6 reveal">
+        <div class="w-11 h-11 rounded-xl bg-azure-500/10 border border-azure-400/20 flex items-center justify-center text-2xl mb-5">🌱</div>
+        <h4 class="font-semibold text-white mb-2">Abertura ao Feedback</h4>
+        <p class="text-sm text-white/60 leading-relaxed">Encaro críticas como atalho para evoluir mais rápido. Quero ouvir o que pode melhorar e aplicar.</p>
+      </div>
+      <div class="grad-border card-hover p-6 reveal">
+        <div class="w-11 h-11 rounded-xl bg-azure-500/10 border border-azure-400/20 flex items-center justify-center text-2xl mb-5">📈</div>
+        <h4 class="font-semibold text-white mb-2">Curiosidade Genuína</h4>
+        <p class="text-sm text-white/60 leading-relaxed">Tenho interesse real em entender como tecnologia gera resultado de negócio — não só em fazer o código funcionar.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- Ambição -->
+  <div class="mt-20 relative reveal">
+    <div class="grad-border p-8 lg:p-12 relative overflow-hidden">
+      <div class="absolute -top-32 -right-32 w-96 h-96 bg-azure-500/20 blur-3xl rounded-full pointer-events-none"></div>
+
+      <span class="font-mono text-[10px] tracking-[0.3em] text-azure-400 uppercase">/ Objetivo</span>
+      <h3 class="font-sans text-2xl lg:text-3xl font-bold text-white mt-3 leading-snug">
+        Em busca de estágio no
+        <span class="grad-text font-serif italic font-normal">Itaú Unibanco</span>
+      </h3>
+      <p class="mt-5 text-white/70 leading-relaxed max-w-3xl">
+        Tenho especial interesse pelas áreas de <strong class="text-azure-300">IA Generativa, Produtos Digitais, Tech Product e Automação Inteligente</strong>. Vejo o Itaú como uma referência em inovação e um ambiente onde posso aprender com profissionais de alto nível, contribuir com o que já sei e crescer de forma consistente.
+      </p>
+      <p class="mt-4 text-white/60 leading-relaxed max-w-3xl italic font-serif text-lg">
+        "Procuro uma oportunidade onde eu possa adquirir experiência sólida, somar ao time desde o primeiro dia e construir uma trajetória de longo prazo."
+      </p>
+    </div>
+  </div>
+</section>
+
+<!-- EXPERIÊNCIA -->
+<section id="experiencia" class="relative max-w-6xl mx-auto px-6 lg:px-10 py-24 lg:py-32 border-t border-white/5">
+  <div class="flex items-center gap-4 mb-16 reveal">
+    <span class="font-mono text-[10px] tracking-[0.3em] text-azure-400 uppercase">/ 02</span>
+    <span class="font-mono text-[10px] tracking-[0.3em] text-white/50 uppercase">Trajetória</span>
+    <div class="h-px flex-1 bg-white/10"></div>
+  </div>
+
+  <h2 class="font-sans text-4xl lg:text-5xl font-bold text-white mb-16 reveal max-w-3xl leading-tight">
+    Experiência <span class="grad-text font-serif italic font-normal">profissional</span>
+  </h2>
+
+  <div class="relative">
+    <div class="absolute left-3 lg:left-4 top-2 bottom-2 w-px bg-gradient-to-b from-azure-400/60 via-white/10 to-transparent"></div>
+
+    <div class="relative pl-12 lg:pl-16 pb-16 reveal">
+      <div class="timeline-dot absolute left-1 lg:left-2 top-2 w-4 h-4 rounded-full bg-azure-400"></div>
+
+      <div class="flex flex-wrap items-baseline gap-3 mb-2">
+        <span class="font-mono text-xs tracking-wider text-azure-300">JAN 2026 — PRESENTE</span>
+        <span class="px-2 py-0.5 rounded-full bg-emerald-400/10 border border-emerald-400/30 text-emerald-300 font-mono text-[10px] tracking-wider uppercase">Atual</span>
+      </div>
+
+      <h3 class="font-sans text-2xl lg:text-3xl font-bold text-white">Desenvolvedor de Agente de IA LLM</h3>
+      <p class="text-white/50 mt-1 font-medium">Projeto Pessoal de Aprofundamento</p>
+
+      <ul class="mt-6 space-y-3 text-white/70 max-w-3xl">
+        <li class="flex gap-3"><span class="text-azure-400 mt-1">▸</span><span>Desenvolvimento de um <strong class="text-white">Agente Conversacional Inteligente</strong> integrado à API do WhatsApp, focado em fluxos de negociação e automação.</span></li>
+        <li class="flex gap-3"><span class="text-azure-400 mt-1">▸</span><span>Construção de fluxos com LLMs, com atenção à experiência do usuário e à clareza das respostas.</span></li>
+        <li class="flex gap-3"><span class="text-azure-400 mt-1">▸</span><span>Elaboração de <strong class="text-white">relatórios e apresentações semanais</strong> documentando avanços, decisões técnicas e próximos passos.</span></li>
+        <li class="flex gap-3"><span class="text-azure-400 mt-1">▸</span><span>Iteração contínua com base em feedback, priorizando melhorias incrementais e qualidade do produto.</span></li>
+      </ul>
+    </div>
+
+    <div class="relative pl-12 lg:pl-16 reveal">
+      <div class="timeline-dot absolute left-1 lg:left-2 top-2 w-4 h-4 rounded-full bg-white/30"></div>
+
+      <span class="font-mono text-xs tracking-wider text-white/40">2022</span>
+      <h3 class="font-sans text-2xl lg:text-3xl font-bold text-white mt-2">Técnico de Manutenção de Equipamentos Hospitalares</h3>
+      <p class="text-white/50 mt-1 font-medium">Hospital Universitário da USP</p>
+
+      <ul class="mt-6 space-y-3 text-white/70 max-w-3xl">
+        <li class="flex gap-3"><span class="text-white/30 mt-1">▸</span><span>Atuação em ambiente hospitalar exigente, desenvolvendo resiliência, responsabilidade e capacidade de resolver problemas sob pressão.</span></li>
+        <li class="flex gap-3"><span class="text-white/30 mt-1">▸</span><span>Suporte técnico em hardware e software, com forte trabalho em equipe multidisciplinar.</span></li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- SKILLS -->
+<section id="skills" class="relative max-w-6xl mx-auto px-6 lg:px-10 py-24 lg:py-32 border-t border-white/5">
+  <div class="flex items-center gap-4 mb-16 reveal">
+    <span class="font-mono text-[10px] tracking-[0.3em] text-azure-400 uppercase">/ 03</span>
+    <span class="font-mono text-[10px] tracking-[0.3em] text-white/50 uppercase">Ferramentas</span>
+    <div class="h-px flex-1 bg-white/10"></div>
+  </div>
+
+  <h2 class="font-sans text-4xl lg:text-5xl font-bold text-white mb-16 reveal max-w-3xl leading-tight">
+    Competências & <span class="grad-text font-serif italic font-normal">habilidades</span>
+  </h2>
+
+  <div class="grid lg:grid-cols-2 gap-6">
+
+    <div class="grad-border p-8 lg:p-10 reveal">
+      <div class="flex items-center gap-3 mb-8">
+        <div class="w-10 h-10 rounded-xl bg-azure-500/15 border border-azure-400/30 flex items-center justify-center text-azure-300">
+          <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4"/>
+          </svg>
+        </div>
+        <div>
+          <div class="font-mono text-[10px] tracking-widest text-white/40 uppercase">Hard Skills</div>
+          <h3 class="font-bold text-white text-xl">Domínio Técnico</h3>
+        </div>
+      </div>
+
+      <ul class="space-y-3.5">
+        <li class="flex items-center justify-between">
+          <span class="text-white/90">Inteligência Artificial & LLMs</span>
+          <span class="font-mono text-[10px] tracking-wider text-azure-300 uppercase">Foco</span>
+        </li>
+        <li class="flex items-center justify-between">
+          <span class="text-white/90">Desenvolvimento de Agentes Conversacionais</span>
+          <span class="font-mono text-[10px] tracking-wider text-azure-300 uppercase">Foco</span>
+        </li>
+        <li class="flex items-center justify-between">
+          <span class="text-white/90">Python</span>
+          <span class="font-mono text-[10px] tracking-wider text-azure-300 uppercase">Intermediário</span>
+        </li>
+        <li class="flex items-center justify-between">
+          <span class="text-white/90">APIs REST · WhatsApp Business API</span>
+          <span class="font-mono text-[10px] tracking-wider text-azure-300 uppercase">Praticando</span>
+        </li>
+        <li class="flex items-center justify-between">
+          <span class="text-white/90">Git & GitHub</span>
+          <span class="font-mono text-[10px] tracking-wider text-azure-300 uppercase">Praticando</span>
+        </li>
+        <li class="flex items-center justify-between">
+          <span class="text-white/90">Planejamento e Arquitetura de Soluções</span>
+          <span class="font-mono text-[10px] tracking-wider text-azure-300 uppercase">Praticando</span>
+        </li>
+        <li class="flex items-center justify-between opacity-75">
+          <span class="text-white/80">SQL</span>
+          <span class="font-mono text-[10px] tracking-wider text-white/40 uppercase">Em estudo</span>
+        </li>
+        <li class="flex items-center justify-between opacity-75">
+          <span class="text-white/80">Cloud Computing (AWS)</span>
+          <span class="font-mono text-[10px] tracking-wider text-white/40 uppercase">Em estudo</span>
+        </li>
+        <li class="flex items-center justify-between opacity-75">
+          <span class="text-white/80">FastAPI</span>
+          <span class="font-mono text-[10px] tracking-wider text-white/40 uppercase">Em estudo</span>
+        </li>
+      </ul>
+    </div>
+
+    <div class="grad-border p-8 lg:p-10 reveal">
+      <div class="flex items-center gap-3 mb-8">
+        <div class="w-10 h-10 rounded-xl bg-azure-500/15 border border-azure-400/30 flex items-center justify-center text-azure-300">
+          <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"/>
+          </svg>
+        </div>
+        <div>
+          <div class="font-mono text-[10px] tracking-widest text-white/40 uppercase">Soft Skills</div>
+          <h3 class="font-bold text-white text-xl">Postura Profissional</h3>
+        </div>
+      </div>
+
+      <div class="flex flex-wrap gap-2.5">
+        <span class="px-4 py-2 rounded-lg bg-white/[0.04] border border-white/10 text-white/90 text-sm hover:border-azure-400/40 hover:bg-azure-500/5 transition">Comunicação Clara</span>
+        <span class="px-4 py-2 rounded-lg bg-white/[0.04] border border-white/10 text-white/90 text-sm hover:border-azure-400/40 hover:bg-azure-500/5 transition">Proatividade</span>
+        <span class="px-4 py-2 rounded-lg bg-white/[0.04] border border-white/10 text-white/90 text-sm hover:border-azure-400/40 hover:bg-azure-500/5 transition">Organização & Planejamento</span>
+        <span class="px-4 py-2 rounded-lg bg-white/[0.04] border border-white/10 text-white/90 text-sm hover:border-azure-400/40 hover:bg-azure-500/5 transition">Trabalho em Equipe</span>
+        <span class="px-4 py-2 rounded-lg bg-white/[0.04] border border-white/10 text-white/90 text-sm hover:border-azure-400/40 hover:bg-azure-500/5 transition">Aprendizado Rápido</span>
+        <span class="px-4 py-2 rounded-lg bg-white/[0.04] border border-white/10 text-white/90 text-sm hover:border-azure-400/40 hover:bg-azure-500/5 transition">Apresentação de Ideias</span>
+        <span class="px-4 py-2 rounded-lg bg-white/[0.04] border border-white/10 text-white/90 text-sm hover:border-azure-400/40 hover:bg-azure-500/5 transition">Abertura ao Feedback</span>
+        <span class="px-4 py-2 rounded-lg bg-white/[0.04] border border-white/10 text-white/90 text-sm hover:border-azure-400/40 hover:bg-azure-500/5 transition">Melhoria Contínua</span>
+        <span class="px-4 py-2 rounded-lg bg-white/[0.04] border border-white/10 text-white/90 text-sm hover:border-azure-400/40 hover:bg-azure-500/5 transition">Pensamento Analítico</span>
+      </div>
+
+      <div class="mt-8 pt-6 border-t border-white/5">
+        <p class="font-serif italic text-white/50 text-lg leading-relaxed">
+          "Aprender, contribuir e evoluir — um passo bem dado de cada vez."
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA FINAL -->
+<section id="contato" class="relative max-w-6xl mx-auto px-6 lg:px-10 py-24 lg:py-32">
+  <div class="grad-border relative overflow-hidden p-10 lg:p-16 reveal">
+    <div class="absolute -top-40 left-1/2 -translate-x-1/2 w-[600px] h-[600px] bg-azure-500/25 blur-3xl rounded-full pointer-events-none"></div>
+
+    <div class="relative text-center max-w-3xl mx-auto">
+      <span class="font-mono text-[10px] tracking-[0.3em] text-azure-400 uppercase">/ Próximo passo</span>
+
+      <h2 class="mt-5 font-sans text-4xl sm:text-5xl lg:text-6xl font-bold text-white leading-[1.05] tracking-tight">
+        Vamos <br/>
+        <span class="grad-text font-serif italic font-normal">conversar?</span>
+      </h2>
+
+      <p class="mt-6 text-lg text-white/70 leading-relaxed">
+        Se essa trajetória faz sentido para a sua equipe, ou se você quiser apenas trocar uma ideia sobre IA, produtos digitais ou tecnologia no mercado financeiro — vou adorar conversar.
+      </p>
+
+      <div class="mt-10 flex flex-wrap justify-center gap-4">
+        <!-- LinkedIn oficial do Rafael -->
+        <a href="https://www.linkedin.com/in/rafael-louzã-515132382/" target="_blank" rel="noopener"
+           class="cta inline-flex items-center gap-2.5 px-7 py-4 rounded-full bg-gradient-to-r from-azure-500 to-azure-400 text-white font-semibold shadow-[0_10px_50px_-12px_rgba(43,130,255,0.7)] hover:shadow-[0_10px_60px_-8px_rgba(43,130,255,1)] transition">
+          <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 relative z-[2]" fill="currentColor" viewBox="0 0 24 24">
+            <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/>
+          </svg>
+          <span class="relative z-[2]">Conectar no LinkedIn</span>
+        </a>
+
+        <a href="https://github.com/RAFAELFIAP123" target="_blank" rel="noopener"
+           class="inline-flex items-center gap-2.5 px-7 py-4 rounded-full border border-white/15 bg-white/[0.03] text-white font-medium hover:bg-white/[0.07] hover:border-white/25 transition">
+          <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24">
+            <path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.4 3-.405 1.02.005 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"/>
+          </svg>
+          Ver GitHub
+        </a>
+
+        <a href="mailto:rlouza@outlook.com"
+           class="inline-flex items-center gap-2.5 px-7 py-4 rounded-full border border-white/15 bg-white/[0.03] text-white font-medium hover:bg-white/[0.07] hover:border-white/25 transition">
+          <svg xmlns="http://www.w3.org/2000/svg" class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/>
+          </svg>
+          Enviar e-mail
+        </a>
+      </div>
+
+      <div class="mt-10 flex flex-wrap justify-center gap-x-6 gap-y-2 font-mono text-xs text-white/40">
+        <span>📍 São Paulo, Brasil</span>
+        <span class="hidden sm:inline">·</span>
+        <span>🎓 FIAP · 3º semestre</span>
+        <span class="hidden sm:inline">·</span>
+        <span>🎯 Foco: Itaú Unibanco</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="relative max-w-6xl mx-auto px-6 lg:px-10 py-10 border-t border-white/5">
+  <div class="flex flex-col sm:flex-row items-center justify-between gap-4">
+    <div class="font-mono text-xs text-white/40 text-center sm:text-left">
+      © 2026 · Rafael Louzã Lopes · Construído com vontade de aprender.
+    </div>
+
+    <!-- Links sociais no rodapé -->
+    <div class="flex items-center gap-4">
+      <!-- LinkedIn -->
+      <a href="https://www.linkedin.com/in/rafael-louzã-515132382/" target="_blank" rel="noopener"
+         aria-label="LinkedIn"
+         class="w-9 h-9 rounded-full border border-white/10 bg-white/[0.03] flex items-center justify-center text-white/60 hover:text-azure-300 hover:border-azure-400/40 transition">
+        <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
+          <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/>
+        </svg>
+      </a>
+
+      <a href="https://github.com/RAFAELFIAP123" target="_blank" rel="noopener"
+         aria-label="GitHub"
+         class="w-9 h-9 rounded-full border border-white/10 bg-white/[0.03] flex items-center justify-center text-white/60 hover:text-azure-300 hover:border-azure-400/40 transition">
+        <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24">
+          <path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.4 3-.405 1.02.005 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"/>
+        </svg>
+      </a>
+
+      <a href="mailto:rlouza@outlook.com"
+         aria-label="E-mail"
+         class="w-9 h-9 rounded-full border border-white/10 bg-white/[0.03] flex items-center justify-center text-white/60 hover:text-azure-300 hover:border-azure-400/40 transition">
+        <svg xmlns="http://www.w3.org/2000/svg" class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/>
+        </svg>
+      </a>
+    </div>
+
+    <div class="font-mono text-xs text-white/30 tracking-widest uppercase">
+      v.2 · São Paulo
+    </div>
+  </div>
+</footer>
+
+<!-- Scroll Reveal -->
+<script>
+  const io = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
+        io.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
+
+  document.querySelectorAll('.reveal').forEach((el, i) => {
+    el.style.transitionDelay = `${Math.min(i * 60, 240)}ms`;
+    io.observe(el);
+  });
+</script>
+
+</body>
+</html>
